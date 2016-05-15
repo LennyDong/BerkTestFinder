@@ -7,7 +7,7 @@ Clone the repository with:
 git clone https://github.com/LennyDong/BerkTestFinder.git
 ```
 
-cd into the repo, and enter the following code to add fetch.py as an executable
+cd into the repo, and enter the following line to add fetch.py as an executable
 ```
 chmod +x fetch.py
 ```
