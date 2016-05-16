@@ -11,8 +11,6 @@ courseName = sys.argv[1].lower().strip()
 
 course = Course(courseName)
 
-semester = input('Which semester? Ex. Fall 2015\n')
-
-test = input('Which test? Ex. Midterm 1\n')
-
-print(course.download(semester, test))
+for sem in course.semesters:
+	print(sem)
+	print(str(sem.getMidterm_1()) + '\n')
