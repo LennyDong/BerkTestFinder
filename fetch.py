@@ -11,6 +11,8 @@ courseName = sys.argv[1].lower().strip()
 
 course = Course(courseName)
 
+test = input('Which test? Ex. Midterm 1\n')
+
 for sem in course.semesters:
 	print(sem)
-	print(str(sem.getMidterm_1()) + '\n')
+	print(str(sem.getTest(test)) + '\n')
