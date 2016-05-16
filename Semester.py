@@ -35,8 +35,6 @@ class Semester:
 		else:
 			return False
 
-
-
 	def addMidterm_1(self, test, solution):
 		self.midterm_1 = Exam(test, solution)
 
@@ -66,18 +64,22 @@ class Semester:
 			return self.getFinal()
 		return None
 
-	def __cmp__(self, other):
-		if self.year > other.year:
-			return -1
-		elif self.year < other.year:
-			return 1
-		else :
-			if self.season == 'fall' and other.season == 'spring':
-				return -1
-			elif self.season == 'spring' and other.season == 'fall':
-				return 1
+	def __eq__(self, other):
+		if self.year == other.year and self.season == other.season:
+			return True
+		else:
+			return False
+
+	def __lt__(self, other):
+		if self.year < other.year:
+			return True
+		elif self.year == other.year:
+			if self.season == 'spring' and other.season == 'fall':
+				return True
 			else:
-				return 0
+				return False
+		else:
+			return False
 
 	def __repr__(self):
 		return '{0} {1}'.format(self.season, self.year)

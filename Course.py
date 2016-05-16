@@ -30,11 +30,11 @@ class Course:
 		self.semesters = self.getHKNSemesters()
 
 	# Gets all the semesters available for this course from HKN, and 
-	# returns a list of Semester objects
+	# returns a dictionary of Semester objects
 	def getHKNSemesters(self):
 		table = self.hknTree.xpath('//table[@id = "exams"]')[0] # Gets the table element from the HKN page
 		rows = table.xpath('tr')
-		semesters = []
+		semesters = {} # Use dictionary so it is easy to look up a specific semester
 		for row in rows:
 			if len(row.xpath('td[2]/text()')) == 0: continue
 
@@ -47,26 +47,33 @@ class Course:
 
 			sem = Semester(season, year, instructor)
 			Course.addHKNTests(sem, row)
-			semesters.append(sem)
+			semesters['{0} {1}'.format(season, year)] = sem
 		return semesters
 
+	# Returns a specific semester object matched by SEM
+	def getSemester(self, sem):
+		return semesters[sem.lower()]
+
+	# Adds all of tests available from HKN for this course, during the specified SEM
 	def addHKNTests(sem, row):
-		pdf, solution = Course.getHKNPair(row.xpath('td[3]')[0])
+		pdf, solution = Course.getHKNPair(row.xpath('td[3]')[0]) # Gets the midterm 1 cell
 		sem.addMidterm_1(pdf, solution)
 
-		pdf, solution = Course.getHKNPair(row.xpath('td[4]')[0])
+		pdf, solution = Course.getHKNPair(row.xpath('td[4]')[0]) # Gets the midterm 2 cell
 		sem.addMidterm_2(pdf, solution)
 
-		pdf, solution = Course.getHKNPair(row.xpath('td[5]')[0])
+		pdf, solution = Course.getHKNPair(row.xpath('td[5]')[0]) # Gets the final cell
 		sem.addFinal(pdf, solution)
 
+	# Gets the pdf & solution pair from the specified CELL. Assumes that the right cell is passed in
+	# Returns both the link for the pdf and the solution
 	def getHKNPair(cell):
-		pdf = cell.xpath('a[text()="[pdf]"]/@href')
+		pdf = cell.xpath('a[text()="[pdf]"]/@href') # Gets the element that has '[pdf]' as text
 		if len(pdf) == 1:
 			pdf = pdf[0]
 		else:
 			pdf = ''
-		solution = cell.xpath('a[text()="[solution]"]/@href')
+		solution = cell.xpath('a[text()="[solution]"]/@href') # Gets the element that has '[solution]' as text
 		if len(solution) == 1:
 			solution = solution[0]
 		else:

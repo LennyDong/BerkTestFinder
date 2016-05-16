@@ -13,6 +13,6 @@ course = Course(courseName)
 
 test = input('Which test? Ex. Midterm 1\n')
 
-for sem in course.semesters:
+for sem in sorted(course.semesters.values(), reverse=True):
 	print(sem)
 	print(str(sem.getTest(test)) + '\n')
