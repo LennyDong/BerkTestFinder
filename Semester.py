@@ -1,8 +1,7 @@
-from lxml import html
 from Exam import *
 import re
 
-# A Semester object holds all the tests from a specific semester for 
+# A Semester object holds all the tests from a specific semester for
 # specific course
 class Semester:
 
@@ -18,6 +17,7 @@ class Semester:
 
 		self.midterm_1 = None
 		self.midterm_2 = None
+		self.midterm_3 = None
 		self.final = None
 
 		# self.instructor = row.xpath('td[2]/text()')
@@ -47,8 +47,14 @@ class Semester:
 	def getMidterm_2(self):
 		return self.midterm_2
 
+	def addMidterm_3(self, test, solution):
+		self.midterm_3 = Exam(test, solution)
+
+	def getMidterm_3(self):
+		return self.midterm_3
+
 	def addFinal(self, test, solution):
-		self.final = Exam(test, solution)	
+		self.final = Exam(test, solution)
 
 	def getFinal(self):
 		return self.final
