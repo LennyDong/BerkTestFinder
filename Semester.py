@@ -15,10 +15,10 @@ class Semester:
 		self.year = year
 		self.instructor = instructor.lower()
 
-		self.midterm_1 = None
-		self.midterm_2 = None
-		self.midterm_3 = None
-		self.final = None
+		self.midterm_1 = Exam("", "")
+		self.midterm_2 = Exam("", "")
+		self.midterm_3 = Exam("", "")
+		self.final = Exam("", "")
 
 		# self.instructor = row.xpath('td[2]/text()')
 		# self.midterm_1 = Exam(row.xpath('td[3]/a[1]/@href'), # Link for the test PDF
@@ -38,11 +38,17 @@ class Semester:
 	def addMidterm_1(self, test, solution):
 		self.midterm_1 = Exam(test, solution)
 
+	def setMidterm_1(self, exam):
+		self.midterm_1 = exam
+
 	def getMidterm_1(self):
 		return self.midterm_1
 
 	def addMidterm_2(self, test, solution):
 		self.midterm_2 = Exam(test, solution)
+
+	def setMidterm_2(self, exam):
+		self.midterm_2 = exam
 
 	def getMidterm_2(self):
 		return self.midterm_2
@@ -50,11 +56,17 @@ class Semester:
 	def addMidterm_3(self, test, solution):
 		self.midterm_3 = Exam(test, solution)
 
+	def setMidterm_3(self, exam):
+		self.midterm_3 = exam
+
 	def getMidterm_3(self):
 		return self.midterm_3
 
 	def addFinal(self, test, solution):
 		self.final = Exam(test, solution)
+
+	def setFinal(self, exam):
+		self.final = exam
 
 	def getFinal(self):
 		return self.final
