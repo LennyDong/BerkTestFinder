@@ -1,0 +1,78 @@
+{% extends 'mainpage/header.html' %}
+
+{% block content %}
+	<div class = 'container-fluid' ng-controller="QueryController as queryCtrl">
+		<form class = 'form-inline' ng-submit="queryCtrl.send(queryCtrl)">
+			<div class = 'form-group'>
+				<label for = "course">Course Name</label>
+			  <select class='form-control' type="text" id = "course" name="course" placeholder="ex: cs61a"
+							 ng-model="queryCtrl.query.course" ng-change="queryCtrl.toggleCourse(queryCtrl)">
+							 {% for class in classes %}
+							 		<option value="{{class}}">{{class}}</option>
+							 {% endfor %}
+				</select>
+				<label for = "semester">Semester</label>
+				<select class='form-control' type="text" id = "semester" name="semester" placeholder="ex: spring 2015"
+							 ng-model="queryCtrl.query.semesters" ng-disabled="!queryCtrl.courseEntered" ng-change="queryCtrl.toggleSemester(queryCtrl)"
+							 multiple="multiple">
+							 {% verbatim %}
+							 		<option ng-repeat="item in queryCtrl.semesters" value="{{item.semester}}">{{item.semester}}</option>
+							 {% endverbatim %}
+				</select>
+				<label for = "test">Test</label>
+				<select class='form-control' type="text" id = "test" name="test" placeholder="ex: midterm 1"
+							 ng-model="queryCtrl.query.tests" ng-disabled="!queryCtrl.semestersEntered" ng-change="queryCtrl.toggleTest(queryCtrl)"
+							 multiple="multiple">
+							 <option value="midterm 1">Midterm 1</option>
+							 <option value="midterm 2">Midterm 2</option>
+							 <option value="midterm 3">Midterm 3</option>
+							 <option value="final">Final</option>
+				</select>
+			  <input type="submit" class='form-control' text='Search' ng-disabled="!queryCtrl.testsEntered">
+			</div>
+		</form>
+		<table class="table table-striped">
+			<tr>
+				<th>Instructor</th>
+				<th>Semester</th>
+				<th>Test</th>
+				<th>Exam</th>
+				<th>Solution</th>
+			</tr>
+			<tr ng-repeat="item in queryCtrl.response" ng-hide="queryCtrl.noTest">
+				<td>
+					{% verbatim %}
+						{{item.instructor}}
+					{% endverbatim %}
+				</td>
+				<td>
+					{% verbatim %}
+						{{item.semester}}
+					{% endverbatim %}
+				</td>
+				<td>
+					{% verbatim %}
+						{{item.test}}
+					{% endverbatim %}
+				<td ng-hide="item.exam == ''">
+					{% verbatim %}
+						<a href="{{item.exam}}" target="_blank">
+							<span class="glyphicon glyphicon-download-alt"></span> Download
+						</a>
+					{% endverbatim %}
+				</td>
+				<td ng-show="item.exam == ''"></td>
+				<td ng-hide="item.solution == ''">
+					{% verbatim %}
+						<a href="{{item.solution}}"  target="_blank">
+							<span class="glyphicon glyphicon-download-alt"></span> Download</a>
+					{% endverbatim %}
+				</td>
+				<td ng-show="item.solution == ''"></td>
+			</tr>
+		</table>
+		<h3 class="text-center" ng-show="queryCtrl.noTest">Sorry we could not find any exam :(</h3>
+		<h4 class="text-center" ng-show="queryCtrl.loading">
+			<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</h4>
+	</div>
+{% endblock %}

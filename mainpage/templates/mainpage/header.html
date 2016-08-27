@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="search">
+
+<head>
+	<title>BerkTestFinder</title>
+	<meta charset="utf-8" />
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'mainpage/css/bootstrap.min.css' %}" type = "text/css"/>
+	<link rel="stylesheet" href="{% static 'mainpage/css/loadingIcon.css' %}" type = "text/css"/>
+	<meta name="viewport" content = "width=device-width, initial-scale=1.0">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet"/>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('select').select2();
+		})
+	</script>
+</head>
+
+<body class="body" style="background-color:#f6f6f6">
+	{% block content %}
+	{% endblock %}
+	<script type="text/javascript" src="{% static 'mainpage/js/angular.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'mainpage/js/app.js' %}"></script>
+
+</body>
+
+</html>
