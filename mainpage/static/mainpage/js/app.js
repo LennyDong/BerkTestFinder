@@ -10,6 +10,7 @@
     this.testsEntered = false;
     this.semesters = [];
     this.exams = [];
+    this.showTable = false;
 
     this.checkNoTest = function(){
       for (i = 0; i < this.response.length; i += 1) {
@@ -23,6 +24,7 @@
 
     this.send = function(queryCtrl){
       this.response = [];
+      this.showTable = true;
       this.loading = true;
       this.noTest = false;
       $http({

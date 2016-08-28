@@ -1,38 +1,68 @@
 {% extends 'mainpage/header.html' %}
 
 {% block content %}
-	<div class = 'container-fluid' ng-controller="QueryController as queryCtrl">
-		<form class = 'form-inline' ng-submit="queryCtrl.send(queryCtrl)">
-			<div class = 'form-group'>
-				<label for = "course">Course Name</label>
-			  <select class='form-control' type="text" id = "course" name="course" placeholder="ex: cs61a"
-							 ng-model="queryCtrl.query.course" ng-change="queryCtrl.toggleCourse(queryCtrl)">
-							 {% for class in classes %}
-							 		<option value="{{class}}">{{class}}</option>
-							 {% endfor %}
-				</select>
-				<label for = "semester">Semester</label>
-				<select class='form-control' type="text" id = "semester" name="semester" placeholder="ex: spring 2015"
-							 ng-model="queryCtrl.query.semesters" ng-disabled="!queryCtrl.courseEntered" ng-change="queryCtrl.toggleSemester(queryCtrl)"
-							 multiple="multiple">
-							 {% verbatim %}
-							 		<option ng-repeat="item in queryCtrl.semesters" value="{{item.semester}}">{{item.semester}}</option>
-							 {% endverbatim %}
-				</select>
-				<label for = "test">Test</label>
-				<select class='form-control' type="text" id = "test" name="test" placeholder="ex: midterm 1"
-							 ng-model="queryCtrl.query.tests" ng-disabled="!queryCtrl.semestersEntered" ng-change="queryCtrl.toggleTest(queryCtrl)"
-							 multiple="multiple">
-							 <option value="midterm 1">Midterm 1</option>
-							 <option value="midterm 2">Midterm 2</option>
-							 <option value="midterm 3">Midterm 3</option>
-							 <option value="final">Final</option>
-				</select>
-			  <input type="submit" class='form-control' text='Search' ng-disabled="!queryCtrl.testsEntered">
-			</div>
-		</form>
+    <div class="container-fluid" style="height: 275px">
+        <h1 class="text-center" style="padding-top: 182px">CalExams</h1>
+    </div>
+    <div class="container-fluid" style="height: 100px">
+        <h3 class="text-center" style="padding-top: 44px">Which tests are you looking for?</h3>
+    </div>
+	<div class = 'container-fluid' style="padding-top: 70px" ng-controller="QueryController as queryCtrl">
+    		<form id="searchForm" class = 'form-inline' ng-submit="queryCtrl.send(queryCtrl)">
+                <div class="row">
+        			<div class = 'form-group col-md-6 col-md-offset-3'>
+                        <div class='spacer' style="padding-right: 10%">
+                            <div class="fieldTitle">
+            				    <label for = "course">Course Name</label>
+                            </div>
+                            <div>
+                			    <select class='form-control' type="text" id = "course" name="course" placeholder="ex: cs61a" style="width: 158px"
+                							 ng-model="queryCtrl.query.course" ng-change="queryCtrl.toggleCourse(queryCtrl)">
+                							 {% for class in classes %}
+                							 		<option value="{{class}}">{{class}}</option>
+                							 {% endfor %}
+                				</select>
+                            </div>
+                        </div>
+                        <div class='spacer' style="padding-right: 10%">
+                            <div class="fieldTitle">
+            			        <label for = "semester">Semester</label>
+                            </div>
+                            <div>
+                				<select class='form-control' type="text" id = "semester" name="semester" placeholder="ex: spring 2015" style="width: 350px"
+                							 ng-model="queryCtrl.query.semesters" ng-disabled="!queryCtrl.courseEntered" ng-change="queryCtrl.toggleSemester(queryCtrl)"
+                							 multiple="multiple">
+                							 {% verbatim %}
+                							 		<option ng-repeat="item in queryCtrl.semesters" value="{{item.semester}}">{{item.semester}}</option>
+                							 {% endverbatim %}
+                				</select>
+                            </div>
+                        </div>
+                        <div class='spacer'>
+                            <div class="fieldTitle">
+            				    <label for = "test">Test</label>
+                            </div>
+                            <div>
+                				<select class='form-control' type="text" id = "test" name="test" placeholder="ex: midterm 1" style="width: 170px"
+                							 ng-model="queryCtrl.query.tests" ng-disabled="!queryCtrl.semestersEntered" ng-change="queryCtrl.toggleTest(queryCtrl)"
+                							 multiple="multiple" style="width: 20%">
+                							 <option value="midterm 1">Midterm 1</option>
+                							 <option value="midterm 2">Midterm 2</option>
+                							 <option value="midterm 3">Midterm 3</option>
+                							 <option value="final">Final</option>
+                				</select>
+                            </div>
+                        </div>
+        			</div>
+                </div>
+                <div class="row col-md-2 col-md-offset-5" style="text-align: center; padding-top: 30px">
+                    <span id="searchButton" style="color: white;
+                                              font-size: 20px;
+                                              letter-spacing: 3.2px" onclick="submitForm()">Search</span>
+                </div>
+    		</form>
 		<table class="table table-striped">
-			<tr>
+			<tr ng-show="queryCtrl.showTable">
 				<th>Instructor</th>
 				<th>Semester</th>
 				<th>Test</th>
@@ -75,4 +105,14 @@
 		<h4 class="text-center" ng-show="queryCtrl.loading">
 			<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</h4>
 	</div>
+    <script>
+        function submitForm(){
+            $("#searchForm").submit();
+        }
+        $(function(){
+            $("#searchForm").on("submit", function (e) {
+                e.preventDefault();
+            })
+        })
+    </script>
 {% endblock %}

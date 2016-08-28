@@ -1,0 +1,39 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Raleway";
+    color: white
+}
+
+h1{
+    letter-spacing: 12.8px;
+    font-size: 64px;
+}
+
+h3 {
+    letter-spacing: 4.8px;
+}
+p, div{
+    font-family: "Raleway";
+}
+
+.fieldTitle {
+    color: white;
+}
+
+.spacer {
+    float: left;
+}
+
+label{
+    letter-spacing: 2.8px;
+}
+
+#searchButton{
+    color: white;
+    font-size: 20px;
+    letter-spacing: 3.2px;
+    cursor: pointer;
+}
+
+#searchButton:hover{
+    text-decoration: underline;
+}
