@@ -4,7 +4,7 @@ CalExams is a web application that aims to stream line the process of searching 
 ## Get Started
 Clone the repository with:
 ```
-$ git clone https://github.com/LennyDong/BerkTestFinder.git
+$ git clone https://github.com/LennyDong/CalExams.git
 ```
 
 Next, please install virtualenv:
