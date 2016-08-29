@@ -9,9 +9,9 @@
     </div>
 	<div class = 'container-fluid' style="padding-top: 20px">
     		<form id="searchForm" class = 'form-inline' ng-submit="queryCtrl.send(queryCtrl)">
-                <div class="row">
-        			<div class = 'form-group col-md-8 col-md-offset-2'>
-                        <div class='spacer' style="padding-right: 8%">
+                <div class="row" style="height: 53px">
+        			<div class='form-group col-md-8 col-md-offset-2' style="position: relative">
+                        <div style="position: absolute; left: 0px">
                             <div class="fieldTitle">
             				    <label for = "course">Course Name</label>
                             </div>
@@ -24,7 +24,7 @@
                 				</select>
                             </div>
                         </div>
-                        <div class='spacer' style="padding-right: 8%">
+                        <div style="position: absolute; left: 50%; margin-left: -175px">
                             <div class="fieldTitle">
             			        <label for = "semester">Semester</label>
                             </div>
@@ -38,7 +38,7 @@
                 				</select>
                             </div>
                         </div>
-                        <div class='spacer'>
+                        <div style='position: absolute; right: 0px'>
                             <div class="fieldTitle">
             				    <label for = "test">Test</label>
                             </div>
