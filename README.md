@@ -17,14 +17,14 @@ $ cd CalExams
 $ virtualenv venv
 ```
 
-Start the virtual environment with:
-```
-$ source venv/bin/activate
-```
-
 Please add your Python3 to the virtual environment with:
 ```
 $ virtualenv -p /usr/bin/PYTHON3_DIRECTORY venv
+```
+
+Start the virtual environment with:
+```
+$ source venv/bin/activate
 ```
 
 Next, install all required packages:
