@@ -1,5 +1,5 @@
 # CalExams
-CalExams is a web application that aims to stream line the process of searching for/downloading past midterms and finals for UC Berkeley classes, currently it only supports computer science classes. CalEaxms pulls the download links from the HKN (https://hkn.eecs.berkeley.edu/exams/) and the Tau Beta Pi (https://tbp.berkeley.edu/courses/) exam archive pages using the Python package BeautifulSoup. In the future, support for other classes will be added as well
+CalExams is a web application that aims to stream line the process of searching for/downloading past midterms and finals for UC Berkeley classes, currently it only supports computer science classes. CalEaxms pulls the download links from the HKN (https://hkn.eecs.berkeley.edu/exams/) and the Tau Beta Pi (https://tbp.berkeley.edu/courses/) exam archive pages using the Python package BeautifulSoup. In the future, support for other classes will be added as well. The web application uses Django as the web framework, and Angular.js as the front end framework
 
 ## Get Started
 Clone the repository with:
