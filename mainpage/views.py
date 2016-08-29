@@ -18,9 +18,9 @@ def search(request):
         for semester in semesters:
             for test in request.GET.getlist('tests'):
                 tests.append({
-                    'semester': "{0} {1}".format(semester.season, semester.year),
+                    'semester': "{0} {1}".format(semester.season, semester.year).capitalize(),
                     'instructor': semester.instructor,
-                    'test': test,
+                    'test': test.capitalize(),
                     'exam': semester.getTest(test).test_link,
                     'solution': semester.getTest(test).solution_link,
                     'empty': (semester.getTest(test).test_link == "") and (semester.getTest(test).solution_link == "")
@@ -35,6 +35,6 @@ def getSemesters(request):
         course = Course(request.GET['course'])
         semestersSortedByObjects = sorted([{"semester": sem, "semesterObject": course.getSemesters()[sem]} for sem in course.getSemesters().keys()], key=lambda k:k["semesterObject"], reverse=True)
         response = {
-                'semesters': [{'semester': item["semester"]} for item in semestersSortedByObjects]
+                'semesters': [{'semester': item["semester"].capitalize()} for item in semestersSortedByObjects]
         }
         return HttpResponse(json.dumps(response))

@@ -1,17 +1,17 @@
 {% extends 'mainpage/header.html' %}
 
 {% block content %}
-    <div class="container-fluid" style="height: 275px">
-        <h1 class="text-center" style="padding-top: 182px">CalExams</h1>
+    <div class="container-fluid" style="height: 211px" ng-hide="queryCtrl.showTable">
+        <h1 class="text-center" style="padding-top: 118px">CalExams</h1>
     </div>
-    <div class="container-fluid" style="height: 100px">
-        <h3 class="text-center" style="padding-top: 44px">Which tests are you looking for?</h3>
+    <div class="container-fluid" style="height: 100px" ng-hide="queryCtrl.showTable">
+        <h4 class="text-center" style="padding-top: 38px">Which tests are you looking for?</h4>
     </div>
-	<div class = 'container-fluid' style="padding-top: 70px" ng-controller="QueryController as queryCtrl">
+	<div class = 'container-fluid' style="padding-top: 20px">
     		<form id="searchForm" class = 'form-inline' ng-submit="queryCtrl.send(queryCtrl)">
                 <div class="row">
-        			<div class = 'form-group col-md-6 col-md-offset-3'>
-                        <div class='spacer' style="padding-right: 10%">
+        			<div class = 'form-group col-md-8 col-md-offset-2'>
+                        <div class='spacer' style="padding-right: 8%">
                             <div class="fieldTitle">
             				    <label for = "course">Course Name</label>
                             </div>
@@ -24,7 +24,7 @@
                 				</select>
                             </div>
                         </div>
-                        <div class='spacer' style="padding-right: 10%">
+                        <div class='spacer' style="padding-right: 8%">
                             <div class="fieldTitle">
             			        <label for = "semester">Semester</label>
                             </div>
@@ -43,7 +43,7 @@
             				    <label for = "test">Test</label>
                             </div>
                             <div>
-                				<select class='form-control' type="text" id = "test" name="test" placeholder="ex: midterm 1" style="width: 170px"
+                				<select class='form-control' type="text" id = "test" name="test" placeholder="ex: midterm 1" style="width: 180px"
                 							 ng-model="queryCtrl.query.tests" ng-disabled="!queryCtrl.semestersEntered" ng-change="queryCtrl.toggleTest(queryCtrl)"
                 							 multiple="multiple" style="width: 20%">
                 							 <option value="midterm 1">Midterm 1</option>
@@ -55,55 +55,59 @@
                         </div>
         			</div>
                 </div>
-                <div class="row col-md-2 col-md-offset-5" style="text-align: center; padding-top: 30px">
+                <div class="row col-md-2 col-md-offset-5" style="text-align: center; padding-top: 50px">
                     <span id="searchButton" style="color: white;
                                               font-size: 20px;
                                               letter-spacing: 3.2px" onclick="submitForm()">Search</span>
                 </div>
     		</form>
-		<table class="table table-striped">
-			<tr ng-show="queryCtrl.showTable">
-				<th>Instructor</th>
-				<th>Semester</th>
-				<th>Test</th>
-				<th>Exam</th>
-				<th>Solution</th>
-			</tr>
-			<tr ng-repeat="item in queryCtrl.response" ng-hide="queryCtrl.noTest">
-				<td>
-					{% verbatim %}
-						{{item.instructor}}
-					{% endverbatim %}
-				</td>
-				<td>
-					{% verbatim %}
-						{{item.semester}}
-					{% endverbatim %}
-				</td>
-				<td>
-					{% verbatim %}
-						{{item.test}}
-					{% endverbatim %}
-				<td ng-hide="item.exam == ''">
-					{% verbatim %}
-						<a href="{{item.exam}}" target="_blank">
-							<span class="glyphicon glyphicon-download-alt"></span> Download
-						</a>
-					{% endverbatim %}
-				</td>
-				<td ng-show="item.exam == ''"></td>
-				<td ng-hide="item.solution == ''">
-					{% verbatim %}
-						<a href="{{item.solution}}"  target="_blank">
-							<span class="glyphicon glyphicon-download-alt"></span> Download</a>
-					{% endverbatim %}
-				</td>
-				<td ng-show="item.solution == ''"></td>
-			</tr>
-		</table>
-		<h3 class="text-center" ng-show="queryCtrl.noTest">Sorry we could not find any exam :(</h3>
-		<h4 class="text-center" ng-show="queryCtrl.loading">
-			<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</h4>
+        <div class="container-fluid col-md-10 col-md-offset-1" style="padding-top: 50px">
+    		<table class="table customTable">
+    			<tr ng-show="queryCtrl.showTable"  style="background-color: transparent;
+                                                          border: none">
+    				<th class="customCell">Instructor</th>
+    				<th>Semester</th>
+    				<th>Test</th>
+    				<th>Exam</th>
+    				<th>Solution</th>
+    			</tr>
+    			<tr ng-repeat="item in queryCtrl.response" style="background-color: transparent;
+                                                                  border: none" ng-hide="queryCtrl.noTest">
+    				<td>
+    					{% verbatim %}
+    						{{item.instructor}}
+    					{% endverbatim %}
+    				</td>
+    				<td>
+    					{% verbatim %}
+    						{{item.semester}}
+    					{% endverbatim %}
+    				</td>
+    				<td>
+    					{% verbatim %}
+    						{{item.test}}
+    					{% endverbatim %}
+    				<td ng-hide="item.exam == ''">
+    					{% verbatim %}
+    						<a href="{{item.exam}}" target="_blank">
+    							<span class="glyphicon glyphicon-download-alt"></span> Download
+    						</a>
+    					{% endverbatim %}
+    				</td>
+    				<td ng-show="item.exam == ''"></td>
+    				<td ng-hide="item.solution == ''">
+    					{% verbatim %}
+    						<a href="{{item.solution}}"  target="_blank">
+    							<span class="glyphicon glyphicon-download-alt"></span> Download</a>
+    					{% endverbatim %}
+    				</td>
+    				<td ng-show="item.solution == ''"></td>
+    			</tr>
+    		</table>
+    		<h3 class="text-center" ng-show="queryCtrl.noTest">Sorry we could not find any exam :(</h3>
+    		<h4 class="text-center" ng-show="queryCtrl.loading">
+    			<span class="glyphicon glyphicon-refresh glyphicon-refresh-animate"></span> Loading...</h4>
+        </div>
 	</div>
     <script>
         function submitForm(){
